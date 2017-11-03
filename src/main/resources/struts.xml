@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="crm" extends="json-default">
+        <action name="home"
+                class="com.lanou.crm.action.HomeAction"
+                method="home">
+            <result name="success">/home.jsp</result>
+        </action>
+        <action name="getPosts"
+                class="com.lanou.crm.action.HomeAction"
+                method="getPostByDepartmentId">
+            <result name="success" type="json">
+                <param name="root">posts</param>
+                <param name="includeProperties">
+                    \[\d\]\.id,
+                    \[\d\]\.name
+                </param>
+            </result>
+        </action>
+
+        <action name="staffs"
+                class="com.lanou.crm.action.StaffAction"
+                method="staffs">
+            <result name="success">/success.jsp</result>
+        </action>
+
+        <action name="staffsJson"
+                class="com.lanou.crm.action.StaffAction"
+                method="staffsJson">
+            <result name="success" type="json">
+                <param name="root">staffs</param>
+                <param name="excludeProperties">
+                   \[\d\]\.department\.posts,
+                   \[\d\]\.department\.staffs,
+                    \[\d\]\.post\.staffs,
+                    \[\d\]\.post\.department
+                </param>
+            </result>
+        </action>
+    </package>
+</struts>
